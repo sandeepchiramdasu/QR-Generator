@@ -1,0 +1,169 @@
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+  background-image: url('../assets/bgimg.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+}
+
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;   
+  gap: 50px;
+  max-width: 95%;
+  padding: 20px 30px;
+
+  
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+
+.qr-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  gap: 15px;
+}
+
+.qr-input {
+  padding: 12px;
+  font-size: 18px;
+  width: 500px;
+  border: 3px solid black;
+  border-radius: 8px;
+}
+
+.qr-btn {
+  padding: 10px 15px;
+  font-size: 18px;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px;       
+  border: 3px solid black;
+  background: white;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.qr-btn:hover {
+  background: rgb(82,88,228);
+  color: white;
+  transform: scale(1.05);
+}
+
+.qr-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.qr-options {
+  display: flex;
+  gap: 10px;
+}
+
+.format-selection {
+  border: 3px solid black;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.qr {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+
+@media (min-width: 1024px) {
+  .qr-container {
+    margin-top: 50px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    background-size: contain;  
+    background-position: top;
+    background-attachment: scroll;
+  }
+
+  .qr-container {
+    flex-direction: column;   
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .qr-input {
+    width: 350px;   
+    font-size: 16px;
+  }
+
+  .qr-btn {
+    width: 180px;
+    font-size: 16px;
+  }
+
+  .qr-right .qr {
+    width: 300px !important;
+    height: 300px !important;
+  }
+}
+
+
+@media (max-width: 480px) {
+  body {
+    background-size: cover;     
+    background-position: center top;
+  }
+
+  .qr-container {
+    margin-top: 20px;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .qr-input {
+    width: 90%;    
+    font-size: 14px;
+  }
+
+  .qr-btn {
+    width: 150px;
+    font-size: 14px;
+  }
+
+  .qr-right .qr {
+    width: 250px !important;
+    height: 250px !important;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .qr-options {
+    flex-direction: column; 
+    gap: 8px;
+  }
+}
