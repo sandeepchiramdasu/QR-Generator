@@ -16,26 +16,43 @@ const QRGenerator = () => {
     }
   }
 
-  const handleDownload = () => {
-    if (!qrcode)
-        alert('please generate QR')
-        return
-    const svg = document.getElementById('qr-code-generator')
-    const svgData = new XMLSerializer().serializeToString(svg)
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    const img = new Image()
-    img.src = 'data:image/svg+xml;base64,' + btoa(svgData)
-    img.onload = () => {
-      canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0)
-      const link = document.createElement('a')
-      link.href = canvas.toDataURL(`image/${format}`)
-      link.download = `qrcode.${format}`
-      link.click()
+    const handleDownload = () => {
+    if (!qrcode) {
+      alert('Please generate QR first!');
+      return;
     }
-  }
+
+    const svg = document.getElementById('qr-code-generator');
+    const svgData = new XMLSerializer().serializeToString(svg);
+
+    // Encode safely to handle Unicode
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // White background if saving as JPG
+      if (format === 'jpg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      ctx.drawImage(img, 0, 0);
+
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL(`image/${format}`);
+      link.download = `qrcode.${format}`;
+      link.click();
+
+      URL.revokeObjectURL(url); // cleanup
+    };
+    img.src = url;
+  };
 
   return (
     <div className="qr-container">
